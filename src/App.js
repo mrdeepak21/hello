@@ -1,11 +1,11 @@
 import './App.css';
-import Bar from './components/Bar';
+import PasswordGen from './components/PasswordGen';
 
 function App() {
   return (
-    <section className='section'>
-      <Bar/>
-    </section>
+    <div>
+      <PasswordGen/>
+    </div>
   );
 }
 

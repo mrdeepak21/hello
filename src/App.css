@@ -3,9 +3,3 @@ body{
   color: #ffffff;
   font-size: 18px;
 }
-
-.section{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}

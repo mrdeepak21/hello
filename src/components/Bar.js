@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import './Bar.css'
+import './assets/css/Bar.css'
 
 function Bar() {
 const [bgColor, setBgColor] = useState('#282c34'); 
 document.querySelector('body').style.backgroundColor=`${bgColor}`;
   return (
+    <div className="section">
     <div className="bar_wrapper">
         <div className="bar">
             <button className="button" color="red" style={{backgroundColor: 'red'}} onClick={e=>setBgColor(e.target.getAttribute('color'))}>Red</button>
@@ -14,6 +15,7 @@ document.querySelector('body').style.backgroundColor=`${bgColor}`;
             <button className="button" color="yellow" onClick={e=>setBgColor(e.target.getAttribute('color'))} style={{backgroundColor: 'yellow'}}>Yellow</button>
             <button className="button" style={{backgroundColor: 'orange'}} color="orange" onClick={e=>setBgColor(e.target.getAttribute('color'))}>Orange</button>
         </div>
+    </div>
     </div>
   )
 }
