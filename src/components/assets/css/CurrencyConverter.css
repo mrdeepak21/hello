@@ -1,0 +1,48 @@
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100dvh;
+}
+
+.container{
+    padding: 50px 0;
+    background-color: #ffffff6d;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 30px;
+    position: relative;
+    width: 500px;
+
+}
+
+h1{
+    text-align: center;
+}
+
+button{
+border-radius: 5px;
+outline: 0;
+border: none;
+background-color: darkblue;
+color: #fff;
+cursor: pointer;
+}
+
+button[type='submit']{
+padding: 10px 50px;
+font-size: 25px;
+width: 100%;
+}
+
+.swap{
+position: absolute;
+z-index: 2;
+margin-top: -15px;
+left: 50%;
+transform: translate(-50%);
+padding: 5px 10px;
+font-size: small;
+text-transform: lowercase;
+}

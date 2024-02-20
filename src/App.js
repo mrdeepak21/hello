@@ -1,10 +1,11 @@
 import './App.css';
-import PasswordGen from './components/PasswordGen';
+import CurrencyConverter from './components/CurrencyConverter';
 
 function App() {
+
   return (
     <div>
-      <PasswordGen/>
+     <CurrencyConverter/>
     </div>
   );
 }
