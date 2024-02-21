@@ -1,38 +1,28 @@
 import {InputBox} from './parts';
 import './assets/css/CurrencyConverter.css'
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
+import useCurrencyConverter from './hooks/useCurrencyConverter';
 
 function CurrencyConverter() {
 
-  const URL = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json`;
-
-  fetch(URL).then(res=>res.json()).then(data=>setAllCurrencies(Object.entries(data)));
-
-  const [allCurrencies,setAllCurrencies] = useState([]);
-   const [amount,setAmount] = useState(0);
-   const [convertedAmount,setConvertedAmount] = useState(0);
-   const [from,setFrom] = useState('usd');
-   const [to,setTo] = useState('inr');
-
-   const newUrl = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${from}.json`;
+  const [amount,setAmount] = useState(0);
+  const [convertedAmount,setConvertedAmount] = useState(0);
+  const [from,setFrom] = useState('usd');
+  const [to,setTo] = useState('inr');
+  const allCurrencies = useCurrencyConverter('usd');
 
 
-    const swap = useCallback(()=>{
-      const tempCur = to;
+    const swap = ()=> {
       setTo(from);
-      setFrom(tempCur);
-      const tempAmount = amount;
+      setFrom(to);
       setAmount(convertedAmount);
-      setConvertedAmount(tempAmount);
-      },[from,to,convertedAmount,setAmount,setConvertedAmount,setTo,setFrom,URL]);
-
-
+      setConvertedAmount(amount);
+      };
       
-    const convertCurrency = useEffect(()=>{
-      fetch(newUrl).then(res=>res.json()).then(data=>setConvertedAmount(amount*Number(data[from][to])))
-    },[to,from,amount,newUrl,setConvertedAmount,InputBox])
-
-
+    const convertCurrency = ()=>{
+      setConvertedAmount(Number(amount) * Number(allCurrencies[to]));
+    }
+    
   return (
     <>
         <h1>Currency Converter</h1>
@@ -48,7 +38,7 @@ function CurrencyConverter() {
         />
         <button onClick={swap} className='swap'>SWAP</button>
         <InputBox 
-        amount={convertedAmount} 
+        amount={Number(convertedAmount)} 
         label='to' 
         currencies={allCurrencies}
         disabled
@@ -62,6 +52,4 @@ function CurrencyConverter() {
   )
 }
 
-export default CurrencyConverter
-
-// api: https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.json
+export default CurrencyConverter;

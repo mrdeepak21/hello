@@ -1,11 +1,14 @@
-import {useState } from "react"
+import { useEffect, useState } from "react";
 
-const useCurrencyConverter = (currency)=> {
-    const [data,setData] = useState({});
-fetch(`https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency}.json`)
-.then(res=> res.json())
-.then(res=>setData(res.currency));
-return useCurrencyConverter;
-};
+export default function useCurrencyConverter(currency = 'usd') {
 
-export default useCurrencyConverter;
+    const url = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${currency}.json`;
+
+    const [currencyInfo, setCurrencyInfo] = useState([]);
+
+    useEffect(() => {
+        fetch(url).then(res => res.json()).then(data => setCurrencyInfo(data[currency]));
+    }, [currency]);
+
+    return currencyInfo;
+}
